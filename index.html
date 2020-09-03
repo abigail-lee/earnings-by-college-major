@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>The Hamilton Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex,nofollow" />
+        <link rel="icon" type="image/png" href="/assets/img/site/site-icons/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="/assets/img/site/site-icons/favicon-16x16.png" sizes="16x16" />
+        <link rel="apple-touch-icon" href="/assets/img/site/site-icons/thp-apple-touch-icon.png" />
+
+        <link rel="stylesheet" type="text/css" href="css/reset.css"><!-- This is the reset CSS from the old website. -->
+        <link rel="stylesheet" href="js/vendor/jquery-slider/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="js/vendor/transition.css" />
+        <link rel="stylesheet" type="text/css" href="js/vendor/dropdown.css" />
+        <link rel="stylesheet" type="text/css" href="css/main.css" type="text/css" /> 
+    </head>
+    
+    <body>
+        
+        
+        <div class="degrees-chart">
+            <nav>
+                <h2>Select up to 4 degrees and education levels to compare:</h2>
+                <div class="wrap--full">
+                    <div class="ui floating dropdown labeled icon button" id="dropdown--one" data-color="#DB5D12">
+                        <i class="filter icon"></i>
+                        <span class="text">Select a degree to compare</span>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="ui icon search input">
+                              <input type="text">
+                              <i class="search icon"></i>
+                            </div>
+                            <div class="section less-than-bachelors">
+                                <div class="header">Less than Bachelors</div>
+                            </div>
+                            <div class="section bachelors">
+                                <div class="header">Bachelors Degrees</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui floating dropdown labeled icon button" id="dropdown--two" data-color="#6E2585">
+                        <i class="filter icon"></i>
+                        <span class="text"><em style="color:#888">Select a degree to compare</em></span>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="ui icon search input">
+                              <input type="text">
+                              <i class="search icon"></i>
+                            </div>
+                            <div class="section less-than-bachelors">
+                                <div class="header">Less than Bachelors</div>
+                            </div>
+                            <div class="section bachelors">
+                                <div class="header">Bachelors Degrees</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui floating dropdown labeled icon button" id="dropdown--three" data-color="#2182AB">
+                        <i class="filter icon"></i>
+                        <span class="text"><em style="color:#888">Select a degree to compare</em></span>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="ui icon search input">
+                              <input type="text">
+                              <i class="search icon"></i>
+                            </div>
+                            <div class="section less-than-bachelors">
+                                <div class="header">Less than Bachelors</div>
+                            </div>
+                            <div class="section bachelors">
+                                <div class="header">Bachelors Degrees</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui floating dropdown labeled icon button" id="dropdown--four" data-color="#509B2F">
+                        <i class="filter icon"></i>
+                        <span class="text"><em style="color:#888">Select a degree to compare</em></span>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="ui icon search input">
+                              <input type="text">
+                              <i class="search icon"></i>
+                            </div>
+                            <div class="section less-than-bachelors">
+                                <div class="header">Less than Bachelors</div>
+                            </div>
+                            <div class="section bachelors">
+                                <div class="header">Bachelors Degrees</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <select class="chart-selection js-chart-selection js-selection--one" data-color="#DB5D12" data-placeholder="Choose a degree...">
+                        <option></option>
+                    </select> -->
+                    <!-- <select class="chart-selection js-chart-selection js-selection--two" data-color="#6E2585" data-placeholder="Choose a degree...">
+                        <option></option>
+                    </select>
+                    <select class="chart-selection js-chart-selection js-selection--three" data-color="#2182AB" data-placeholder="Choose a degree...">
+                        <option></option>
+                    </select>
+                    <select class="chart-selection js-chart-selection js-selection--four" data-color="#509B2F" data-placeholder="Choose a degree...">
+                        <option></option>
+                    </select>      -->                                   
+                </div>
+                <div class="chart-filters">
+                    <label class="container chart-filter js-chart-filter js-filter--full-time">Include Full-Time Workers Only
+                      <input type="checkbox" checked="checked"  value="full-time">
+                      <span class="checkmark"></span>
+                    </label>
+
+                    <label class="container chart-filter js-chart-filter js-filter--graduate">Include Graduate Degrees
+                      <input type="checkbox" value="graduate">
+                      <span class="checkmark"></span>
+                    </label>    
+
+                    <!-- <label class="chart-filter js-chart-filter js-filter--full-time">
+                        <input type="checkbox" value="full-time" />
+                        Include Full-Time Workers Only
+                    </label>
+                    <label class="chart-filter js-chart-filter js-filter--graduate">
+                        <input type="checkbox" value="graduate" />
+                        Include Graduate Degrees
+                    </label> -->
+                </div>
+            </nav>
+
+            <section class="charts">
+
+                <div class="chart js-chart--median-annual">
+                    <h2>Annual Earnings</h2>
+                    <p class="subtitle">Median annual earnings over career.</p>
+                    <div class="mobile-slider-container">
+                        <p class="subtitle">Drag slider or type in box to adjust year since start of career.</p>
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="42" value="1" class="slider" step="1" id="median-annual-slider">
+                            <div class="slider--typebox">
+                                <input id="slider__number" type="number" size="3" maxlength="3" min="1" max="100" placeholder="1"/>
+                            </div>
+                        </div>
+                    <div class="chart-contain">
+                        <aside class="chart-label js-chart-label"></aside>
+                    </div>
+                    <div id="mobile-chart-container">
+                        <aside class="chart-label js-chart-label js-mobile-chart-label"></aside>
+                    </div>
+                </div>
+            </div>
+                <div class="chart js-chart--percentile">
+                    <h2>Lifetime Earnings</h2>
+                    <p class="subtitle">Distribution of present discounted value of lifetime earnings</p>
+                    <div class="mobile-slider-container">
+                        <h3>Percentile</h3>
+                        <!-- <p class="subtitle">Drag slider or type in box to adjust year since start of career.</p> -->
+                        <div class="slidecontainer">
+                            <input type="range" min="5" max="95" value="1" class="slider" step="1" id="percentile-slider">
+                            <div class="slider--typebox">
+                                <input id="slider__number2" type="number" size="3" maxlength="3" min="5" max="95" placeholder="5"/>
+                            </div>
+                        </div>
+                    <div class="chart-contain">
+                        <aside class="chart-label js-chart-label"></aside>
+                    </div>
+                    <div class="percentile__range-slider">
+                        <h3>Percentile of Earnings Distribution</h3>
+                        <div id="slider-range"></div>
+                         <div class="slider--typebox" id="percentile__start-container">
+                            <input id="percentile__start" type="number" size="3" maxlength="3" min="5" max="100" value="0"/>
+                        </div>
+                         <div class="slider--typebox" id="percentile__end-container">
+                            <input id="percentile__end" type="number" size="3" maxlength="3" min="5" max="100" value="100"/>
+                        </div>
+                    </div>
+                    <div id="mobile-chart-container" >
+                        <aside class="chart-label js-chart-label js-mobile-chart-label"></aside>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        
+        <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.11.1.min.js"><\/script>')</script> -->
+        <script src="js/vendor/chosen/jquery-3.5.0.min.js"></script>
+        <script src="js/vendor/jquery-slider/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+        <!-- <script type="text/javascript" src="js/vendor/chosen/chosen.jquery.min.js"></script> -->
+        <script type="text/javascript" src="js/vendor/transition.min.js"></script>
+        <script type="text/javascript" src="js/vendor/dropdown.js"></script>
+        <script type="text/javascript" src="js/vendor/d3.js"></script>
+        <script type="text/javascript" src="js/degrees-chart-control.js"></script>
+        <script type="text/javascript" src="js/sample.js"></script>        
+    </body>
+    
+</html>

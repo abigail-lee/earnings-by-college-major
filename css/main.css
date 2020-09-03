@@ -1,0 +1,683 @@
+/*
+**
+**	Styles for Degrees Chart
+**
+**	Chart contained within .degrees-chart
+**
+*/
+
+.degrees-chart { 
+	width:100%;
+	max-width: 940px;
+	overscroll-behavior-x: none;
+}
+
+
+.degrees-chart * {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+/** GENERAL COMPONENTS -------------------- **/
+.degrees-chart .wrap--half {
+	display: inline-block;
+	vertical-align: top;
+}
+.degrees-chart .wrap--half {
+	width: 50%;
+}
+.degrees-chart .wrap--full {
+	width: 100%;
+	text-align: left;
+	position:relative;
+	display:flex;
+	margin-bottom:20px;
+}
+
+@media screen and (max-width:768px) {
+	.degrees-chart .wrap--full {
+		flex-direction: column;
+	}
+}
+
+/** SVG STYLING NORMALIZE ----------------- **/
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #CCCCCC;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+.y.axis .tick line {
+	stroke: #ddd;
+}
+/*.js-chart--percentile .y.axis .tick line {
+	stroke:#2A3F49;
+}*/
+.axis .tick text {
+	fill: #2A3F49;
+}
+.context .x.axis text {
+	fill: #fff;
+}
+.context .extent {
+	fill: #14adcc;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2.5px;
+}
+
+.js-chart--percentile .degree .line {
+  clip-path: url(#clip);
+}
+
+/**	OVERLAY	------------------------------- **/
+.full-screen-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	background-color: #566c73;
+	background-color: rgba(86,108,115,.95);
+	text-align: center;
+}
+.full-screen-overlay::before {
+	height: 100%;
+	display: inline-block;
+	width:1px;
+	overflow: hidden;
+	vertical-align: middle;
+	content: " ";
+}
+.full-screen-overlay .full-screen-overlay-content {
+	max-width: 50em;
+	min-width: 250px;
+	width: 80%;
+	color: #fff;
+	font-family: Georgia, serif;
+	font-size: 1.125em;
+	text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+}
+.full-screen-overlay .full-screen-overlay-content p {
+	color: #fff;
+}
+a.full-screen-overlay-close {
+	background: #6db635;
+	display: inline-block;
+	padding: .5em 3em;
+	font-family: Helvetica, Arial, sans-serif;
+	border-radius: 4px;
+	color: #fff;
+	text-decoration: none;
+	font-size: 1.125em;
+	margin: 2em 0 0 0;
+}
+
+
+/**	NAV	----------------------------------- **/
+.degrees-chart nav {
+	background: #2A3F49;
+	color: #fff;
+	width: 100%;
+	padding: 20px 20px 8px 20px;
+	font-size: 16px;
+}
+.degrees-chart nav h2 {
+	color: #FFFFFF;
+	font-family: Helvetica, Arial, sans-serif;
+	text-transform: none;
+	font-size: 1em;
+	display: inline-block;
+	width: 50%;
+	font-weight:300;
+}
+
+@media (max-width:768px){
+	.degrees-chart nav h2  {
+		width:100%;
+	}
+}
+.degrees-chart nav.sticky {
+	position: fixed;
+	width:100%;
+	max-width: 940px;
+	top: 0;
+	z-index: 10;
+	-moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+	-webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+}
+.chart-filters {
+	text-align: right;
+	display:flex;
+	width:100%;
+	flex-direction: row;
+}
+.chart-filters label.chart-filter {
+	font-weight: 300;
+	padding-left: 1.5em;
+	font-size:0.9em;
+	padding-left:25px;
+}
+.chart-filters .chart-filter input {
+	position: static;
+}
+
+@media screen and (max-width:600px) {
+	.chart-filters {
+		flex-direction: column;
+		align-items: start
+	}
+
+	.degrees-chart nav.sticky {
+		position:relative;
+	}
+}
+
+/** new dropdowns **/
+.ui.floating.dropdown.labeled.icon.button {
+	background-color:#FEFEFE;
+	color:#000;
+	font-size:14px;
+	width:100%;
+	max-width:215px;
+	padding:7px;
+	border:1px solid #ccc;
+	position:relative;
+	padding-left:25px;
+	line-height:1.2;
+	display:none;
+}
+
+.dropdown > i.icon.filter {
+	position:absolute;
+	left:-1px;
+	top:-1px;
+	height:calc(100% + 2px);
+	width:20px;
+}
+
+.dropdown > i.icon.dropdown {
+	float:right;
+	top:10%;
+	color:#545454;
+}
+
+.ui.floating.dropdown.labeled.icon.button:nth-of-type(n+2) {
+	margin-left:10px;
+}
+
+#dropdown--one i.icon.filter {
+	background:#DB5D12;
+}
+#dropdown--two i.icon.filter {
+	background: #6E2585;
+}
+#dropdown--three i.icon.filter {
+	background: #2182AB;
+}
+#dropdown--four i.icon.filter {
+	background: #509B2F;
+}
+
+.ui.floating.dropdown.labeled.icon.button span.text {
+	max-width:80%;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+	text-transform: capitalize;
+}
+
+.ui.floating.dropdown.labeled.icon.button .menu {
+	max-height:300px;
+	overflow-y:scroll;
+	width:215px;
+	background: #F5F5F5;
+	border-radius:0 !important;
+	margin-top:1px !important;
+	margin-left:-1px !important;
+
+}
+
+.ui.dropdown.dropdown .menu > .input {
+	margin:0;
+	padding:10px;
+	margin-bottom:-20px;
+}
+
+.ui.dropdown.dropdown .menu > .input input {
+	font-size:12px;
+	line-height:1.3;
+	vertical-align: middle;
+	width:100%;
+	position:relative;
+}
+
+/*@font-face {
+  font-family: 'Icons';
+  src: url("././assets/fonts/icons.eot");
+  src: url("./assets/fonts/icons.eot?#iefix") format('embedded-opentype'), url("../../assets/fonts/icons.woff2") format('woff2'), url("./assets/fonts/icons.woff") format('woff'), url("./assets/fonts/icons.ttf") format('truetype'), url("./assets/fonts/icons.svg#icons") format('svg');
+}*/
+
+.ui.dropdown.dropdown .menu > .input i.icon.search {
+  font-family: 'Icons';
+  font-size:16px;
+  color:#000;
+  z-index:3;
+  position: absolute;
+  right:10px;
+  top:12px;
+}
+
+.degrees-chart .ui.floating.dropdown.labeled.icon.button.drop-visible {
+	display:block;
+}
+
+.ui.floating.dropdown.labeled.icon.button .menu .item {
+	font-size:12px;
+	color:#000;
+	padding:0.3rem 1.14285714rem 0.3rem 2.14285714rem !important;
+	max-width:100%;
+	white-space:normal;
+	line-height:1.3;
+	text-transform: capitalize;
+}
+
+.ui.floating.dropdown.labeled.icon.button .menu > .section .item:hover {
+	background:#1C2E38;
+	color:#fff;
+}
+
+.ui.floating.dropdown.labeled.icon.button .menu .item.disabled {
+	pointer-events: none;
+	color:#aaa;
+}
+
+.ui.floating.dropdown.labeled.icon.button .menu .header {
+	text-transform:none;
+	font-size:14px;
+	border-bottom:0;
+	padding:0em 0.75rem 0em 0.75rem;
+	margin-bottom:0.5em;
+}
+
+@media screen and (max-width:768px) {
+	.ui.floating.dropdown.labeled.icon.button {
+		width:100%;
+		max-width:450px;
+	}
+
+	.ui.floating.dropdown.labeled.icon.button:nth-of-type(n+2) {
+		margin-left:0;
+		margin-top:10px;
+	}	
+} 
+
+/** SLIDERS **/
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+  margin:auto;
+}
+
+.degrees-chart .chart .mobile-slider-container > p.subtitle {
+	margin:0 0 20px 0;
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 5px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+#slider-range.ui-widget-content {
+  width: 100%; /* Full-width */
+  height: 5px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  border:0px;
+  border-radius:0px;
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 20px; 
+  height: 20px; 
+  background: #2A3F49;
+  border-radius:50%;
+  cursor: pointer; 
+}
+
+.slider::-moz-range-thumb {
+  width: 20px; 
+  height: 20px; 
+  background: #2A3F49;
+  cursor: pointer;
+}
+
+#slider-range span.ui-slider-handle {
+	background:#2A3F49;
+	width:20px;
+	height:20px;
+	border-radius:50%;
+	margin-top:-4px;
+	border:0;
+}
+
+#slider-range .ui-slider-range {
+	background:#2A3F49;
+}
+
+.slider--typebox {
+	display:inline-block;
+	position: relative;
+}
+
+.slider--typebox input {
+	background-color:#2A3F49;
+	-webkit-appearance: none;
+	appearance:none;
+	border:0px;
+	padding:10px 5px;
+	color:#fff;
+	font-size:14px;
+	border-radius:18%;
+	text-align:center;
+	margin-top:9px;
+	position:relative;
+}
+
+.mobile-slider-container > p, .mobile-slider-container div.slidecontainer, .degrees-chart #mobile-chart-container,
+.mobile-slider-container > h3 {
+	display:none;
+}
+
+@media screen and (max-width:768px) {
+	.slider--typebox input {
+		width:35px;
+	}
+
+	.mobile-slider-container > p, .mobile-slider-container div.slidecontainer, 
+	.degrees-chart #mobile-chart-container, .mobile-slider-container > h3 {
+		display: block;
+	} 	
+}
+
+.percentile__range-slider {
+	min-height:100px;
+}
+
+#percentile__end-container, #percentile__start-container {
+	position:absolute;
+}
+
+
+/* hide number incrementers */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* checkboxes */
+
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #007464;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/** CHART LABEL WIDGET -------------------- **/
+.degrees-chart .chart-contain, .degrees-chart #mobile-chart-container {
+	position: relative;
+}
+.degrees-chart .chart .chart-label {
+	width: 300px;
+	display: none;
+	position: absolute;
+}
+.degrees-chart #mobile-chart-container > .chart-label {
+	position:static;
+	width:100%;
+}
+
+@media screen and (max-width:768px) {
+	.degrees-chart .chart-contain aside {
+		display:none !important;
+	}
+}
+
+.degrees-chart .chart .chart-label p,
+.degrees-chart .chart .chart-label h2 {
+	width: 100%;
+	padding: 8px;
+	line-height: 1em;
+	font-size:14px;
+	color: #fff;
+	background: #2487b2;
+	margin: 0;
+	font-family: Helvetica, Arial, sans-serif;
+	font-style: normal;
+}
+.degrees-chart .chart .chart-label p {
+	padding:1px 20px;
+}
+.degrees-chart .chart .chart-label p {
+	line-height: 1.75em;
+}
+.degrees-chart .chart .chart-label h2 {
+	background: #F5F5F5;
+	color:#000;
+	text-shadow: none;
+	position:relative;
+	font-weight:300;
+	font-size:14px;
+}
+.degrees-chart .chart.js-chart--median-annual .chart-label h2:after,
+.degrees-chart .chart.js-chart--percentile .chart-label h2:after  { 
+	content: 'Thousands of 2018 Dollars';
+	display: block; 
+	font-size: 10px; 
+	line-height: 14px; 
+	font-style: italic; 
+	color: #000; 
+	text-transform: none; 
+}
+.degrees-chart .chart.js-chart--percentile .chart-label h2:after { 
+	content: 'Millions of 2018 Dollars'; 
+}
+
+@media screen and (max-width:1768px) {
+	.degrees-chart .chart.js-chart--median-annual .chart-label h2:after,
+	.degrees-chart .chart.js-chart--percentile .chart-label h2:after {
+		display:inline-block;
+		position:absolute;
+		right:10px;
+		font-size:13px;
+	}
+}
+
+.degrees-chart .chart.js-chart--median-annual #mobile-chart-container .chart-label h2,
+.degrees-chart .chart.js-chart--percentile #mobile-chart-container .chart-label h2,
+.degrees-chart .chart.js-chart--median-annual #mobile-chart-container .chart-label h2:after,
+.degrees-chart .chart.js-chart--percentile #mobile-chart-container .chart-label h2:after {
+	display:block;
+	position:relative;
+	width:100%;
+	text-align:center;
+	line-height:1.4;
+	right:0;
+}
+
+.degrees-chart .chart .chart-label span {
+	display: inline-block;
+	vertical-align: middle;
+}
+.degrees-chart .chart .chart-label span.chart-label-degree {
+	width: 80%;
+	text-align: left;
+	font-size:14px;
+	font-weight:700;
+	text-transform: capitalize;
+}
+.degrees-chart .chart .chart-label span.chart-label-income {
+	width: 18%;
+	text-align: right;
+	font-size:14px;
+	font-weight:700;
+}
+
+/**	CHARTS -------------------------------- **/
+.degrees-chart .charts {
+	padding: 20px 0;
+}
+.degrees-chart .chart {
+	margin-top: 1.5em;
+	margin-bottom: 3em;
+	padding: 0 20px;
+}
+
+.chart.js-chart--median-annual {
+	background-color:#fff;
+}
+.chart.js-chart--percentile {
+	background-color:#F5F5F5;
+}
+.degrees-chart .chart + .chart {
+	padding-top: 3em;
+}
+.degrees-chart .chart h2, .degrees-chart .chart h3 {
+	font-family: Georgia, serif;
+	font-size: 2.25em;
+	font-weight: normal;
+	margin-bottom: 0;
+	text-shadow: 1px 1px #FFF;
+	color: #1C2E38;
+}
+.degrees-chart .chart h3 {
+	font-size:1.5em;
+	margin:1.25em 0 1em 0;
+}
+.degrees-chart .chart .subtitle {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: #566c73;
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
+.degrees-chart .y.axis {
+	fill: #2A3F49;
+}
+
+.degrees-chart .chart-contain svg {
+	max-width:100%;
+}
+
+/**	ZOOM RESET ---------------------------- **/
+a.brush-reset {
+	display: inline-block;
+	color: #666666;
+	padding: .5em 1em;
+	border: 1px solid #CCC;
+	text-decoration: none;
+	position: absolute;
+	right: 0;
+	bottom: 26px;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5));
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%);
+	background: -o-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%);
+	background: -ms-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%);
+	background: linear-gradient(to bottom,  #ffffff 0%,#e5e5e5 100%);
+}
+a.brush-reset:hover {
+	background: #e5e5e5;
+}
+a.brush-reset img {
+	margin-bottom: -1px;
+}
