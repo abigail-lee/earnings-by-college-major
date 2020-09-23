@@ -80,7 +80,8 @@ $(document).ready(function() {
           });
           drawChart();
         },
-        placeholder: 'Select a degree to compare'
+        placeholder: 'Select a degree to compare',
+        fullTextSearch: 'exact'
       });
     });
 
