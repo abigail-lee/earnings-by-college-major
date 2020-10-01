@@ -299,7 +299,7 @@ a.full-screen-overlay-close {
 	color:#fff;
 }
 
-.ui.floating.dropdown.labeled.icon.button .menu .item.disabled {
+.ui.floating.dropdown.labeled.icon.button .menu .item.disabled:not(.selected) {
 	pointer-events: none;
 	color:#aaa;
 }
@@ -569,6 +569,16 @@ input[type=number] {
 .degrees-chart .chart.js-chart--percentile .chart-label h2:after { 
 	content: 'Millions of 2018 Dollars'; 
 }
+
+/*@media screen and (min-width:1500px) {
+	.degrees-chart .chart.js-chart--median-annual .chart-label h2:after,
+	.degrees-chart .chart.js-chart--percentile .chart-label h2:after {
+		display:inline-block;
+		position:absolute;
+		right:10px;
+		font-size:13px;
+	}
+}*/
 
 .degrees-chart .chart.js-chart--median-annual #mobile-chart-container .chart-label h2,
 .degrees-chart .chart.js-chart--percentile #mobile-chart-container .chart-label h2,
