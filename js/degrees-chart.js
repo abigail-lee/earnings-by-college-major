@@ -35,7 +35,9 @@ $(document).ready(function() {
   d3.csv("data/median_.csv", function(data) {
 
     //  Returns just our column headers, except "year"
-    var headers = d3.keys(data[0]).filter(function(key) { return key !== "year"; });
+    var headers = d3.keys(data[0]).filter(function(key) { return key !== "year"; }),
+        currentSelections = [],
+        newSelections = [];
 
     var grouping = ["Some High School", "High School Degree or GED", "Some College, No Degree", "Associate Degree"];
     var nonDegreeGroup = document.querySelectorAll(".section.less-than-bachelors");
@@ -46,11 +48,11 @@ $(document).ready(function() {
     headers.forEach(function(header) {
       if(grouping.indexOf(header) != -1) {
         nonDegreeGroup.forEach(function(x) {
-          x.innerHTML +=  "<div class='item'>" + header + "</div>"; 
+          x.innerHTML +=  "<div class='item' data-value='" + header + "'>" + header + "</div>"; 
         })
       } else {
         degreeGroup.forEach(function(x) {
-          x.innerHTML +=  "<div class='item'>" + header + "</div>"; 
+          x.innerHTML +=  "<div class='item' data-value='" + header + "'>" + header + "</div>"; 
         })
       }
     });
@@ -59,25 +61,35 @@ $(document).ready(function() {
       $(x).dropdown({
         onChange: function(value, text, $selectedItem){
           var items = document.querySelectorAll(".dropdown .menu .item"),
+              disabledItems = document.querySelectorAll(".dropdown .menu .item.disabled"),
               parents = ["dropdown--one", "dropdown--two", "dropdown--three", "dropdown--four"],
-              nextMenu = $(this)[0].nextElementSibling;
+              nextMenu = $(this)[0].nextElementSibling,
+              currentSelections = [];
+
+          // currentSelections.push($(`#${y}`).dropdown("get value"));
         
           // show next menu upon selection
           if (nextMenu != null) { nextMenu.classList.add("drop-visible") };
 
+          disabledItems.forEach(x => { x.classList.remove("disabled") });
+
           // disable the selection choice in other menus
           parents.forEach(function(y){
-            if (y != x.id) {
-              let items = document.getElementById(y).querySelectorAll(".item");
+            currentSelections.push($(`#${y}`).dropdown("get text"));
+          });
 
-              for (var i = 0; i < items.length; i++){
-                if (items[i].innerText == text) {
-                  items[i].classList.add("disabled");
-                  break;
+          for (let i = 0; i < parents.length; i++){
+            let list = document.getElementById(parents[i]).querySelectorAll(".item");
+
+            currentSelections.forEach(x => {
+              for (var j = 0; j < list.length; j++){
+                if (list[j].innerText.toLowerCase() == x.toLowerCase()) {
+                  list[j].classList.add("disabled");
                 }
               }
-            }
-          });
+            });
+          }
+
           drawChart();
         },
         placeholder: 'Select a degree to compare',
@@ -129,13 +141,12 @@ $(document).ready(function() {
         console.log(`median_${degreeChart.getTypes()}.csv`);
     }
 
-    var width = $(window).width();
+    var width = window.innerWidth;
 
     $(window).resize(function(){
-      if ($(this).width() !== width) {
+      if (window.innerWidth !== width) {
         drawChart();
         width = $(this).width();
-        console.log("go");
       }
     });
 
